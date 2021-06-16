@@ -3,7 +3,7 @@ import React, {useReducer} from 'react';
 import './App.css';
 
 import reducer, {initialState} from './reducers';
-import {addOne, applyNumber, changeOperation, clearDisplay, memoryReset} from './actions/index'
+import {addOne, applyNumber, changeOperation, clearDisplay, memoryReset, setMemory} from './actions/index'
 import TotalDisplay from './components/TotalDisplay';
 import CalcButton from './components/CalcButton';
 
@@ -28,6 +28,10 @@ function App() {
     dispatch(memoryReset())
   }
 
+  const clickSetMemory = () => {
+    dispatch(setMemory(state.total))
+  }
+
   return (
     <div className="App">
       <nav className="navbar navbar-dark bg-dark">
@@ -45,8 +49,8 @@ function App() {
             </div>
             
             <div className="row">
-              <CalcButton value={"M+"}/>
-              <CalcButton value={"MR"}/>
+              <CalcButton value={"M+"} onClick={() => clickSetMemory()} />
+              <CalcButton value={"MR"} onClick={() => clickDispatchNum(state.memory)} />
               <CalcButton value={"MC"} onClick={() => clickMemoryReset()} />
             </div>
 
