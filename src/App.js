@@ -3,7 +3,7 @@ import React, {useReducer} from 'react';
 import './App.css';
 
 import reducer, {initialState} from './reducers';
-import {addOne, applyNumber, changeOperation} from './actions/index'
+import {addOne, applyNumber, changeOperation, clearDisplay, memoryReset} from './actions/index'
 import TotalDisplay from './components/TotalDisplay';
 import CalcButton from './components/CalcButton';
 
@@ -18,6 +18,14 @@ function App() {
   const clickDispatchOperator = operator => {
     console.log(operator)
     dispatch(changeOperation(operator))
+  }
+
+  const clickClearDisplay = () => {
+    dispatch(clearDisplay())
+  }
+
+  const clickMemoryReset = () => {
+    dispatch(memoryReset())
   }
 
   return (
@@ -39,7 +47,7 @@ function App() {
             <div className="row">
               <CalcButton value={"M+"}/>
               <CalcButton value={"MR"}/>
-              <CalcButton value={"MC"}/>
+              <CalcButton value={"MC"} onClick={() => clickMemoryReset()} />
             </div>
 
             <div className="row">
@@ -67,7 +75,7 @@ function App() {
             </div>
 
             <div className="row ce_button">
-              <CalcButton value={"CE"}/>
+              <CalcButton value={"CE"} onClick={() => clickClearDisplay()} />
             </div>
 
           </form>
